@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": [],
-  "sourcesContent": [],
-  "mappings": "",
+  "sources": ["../index.ts"],
+  "sourcesContent": ["type WithLog = {\n  number: number\n  logs: string[]\n}\n\nfunction wrappedNum(number: number): WithLog {\n  return {\n    number: number,\n    logs: []\n  }\n}\n\nfunction addTwo(number: number): WithLog {\n  return {\n    number: number + 2,\n    logs: [`${number} + 2`]\n  }\n}\n\nfunction mulTwo(number: number): WithLog {\n  return {\n    number: number * 2,\n    logs: [`${number} * 2`]\n  }\n}\n\nfunction run(numberWithLogs: WithLog, transform: (_: number) => WithLog): WithLog {\n  const transformed = transform(numberWithLogs.number)\n  return {\n    number: transformed.number,\n    logs: numberWithLogs.logs.concat(transformed.logs)\n  }\n}\n\nconst add = run(wrappedNum(3), addTwo)\nconst mul = run(wrappedNum(3), mulTwo)\nconst chained = run(run(wrappedNum(3), addTwo), mulTwo)\nconst deepChained = run(run(run(wrappedNum(3), addTwo), mulTwo), addTwo)\n\nconsole.log(add)\nconsole.log(mul)\nconsole.log(chained)\nconsole.log(deepChained)"],
+  "mappings": ";AAKA,SAAS,WAAW,QAAyB;AAC3C,SAAO;AAAA,IACL;AAAA,IACA,MAAM,CAAC;AAAA,EACT;AACF;AAEA,SAAS,OAAO,QAAyB;AACvC,SAAO;AAAA,IACL,QAAQ,SAAS;AAAA,IACjB,MAAM,CAAC,GAAG,YAAY;AAAA,EACxB;AACF;AAEA,SAAS,OAAO,QAAyB;AACvC,SAAO;AAAA,IACL,QAAQ,SAAS;AAAA,IACjB,MAAM,CAAC,GAAG,YAAY;AAAA,EACxB;AACF;AAEA,SAAS,IAAI,gBAAyB,WAA4C;AAChF,QAAM,cAAc,UAAU,eAAe,MAAM;AACnD,SAAO;AAAA,IACL,QAAQ,YAAY;AAAA,IACpB,MAAM,eAAe,KAAK,OAAO,YAAY,IAAI;AAAA,EACnD;AACF;AAEA,MAAM,MAAM,IAAI,WAAW,CAAC,GAAG,MAAM;AACrC,MAAM,MAAM,IAAI,WAAW,CAAC,GAAG,MAAM;AACrC,MAAM,UAAU,IAAI,IAAI,WAAW,CAAC,GAAG,MAAM,GAAG,MAAM;AACtD,MAAM,cAAc,IAAI,IAAI,IAAI,WAAW,CAAC,GAAG,MAAM,GAAG,MAAM,GAAG,MAAM;AAEvE,QAAQ,IAAI,GAAG;AACf,QAAQ,IAAI,GAAG;AACf,QAAQ,IAAI,OAAO;AACnB,QAAQ,IAAI,WAAW;",
   "names": []
 }
